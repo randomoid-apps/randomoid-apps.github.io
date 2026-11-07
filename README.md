@@ -1,8 +1,14 @@
-# overtone-workouts.github.io
+# randomoid-apps.github.io
 
-The website of Overtone, the iPhone app that plays a spoken coach over your music: its front page,
-privacy policy and support page, at https://overtone-workouts.github.io. The workout library is the
-[overtone-workouts](https://github.com/overtone-workouts/overtone-workouts) repository, published
-beside it at https://overtone-workouts.github.io/overtone-workouts/.
+The website of Randomoid Apps, at https://randomoid-apps.github.io: a page per app with its privacy
+policy and support page, which App Store Connect links to.
 
-Plain HTML and one stylesheet, served by GitHub Pages from `main`.
+| Path | What it is |
+|---|---|
+| `/` | The apps |
+| `/overtone/`, `/overtone/privacy.html`, `/overtone/support.html` | Overtone |
+| `/haver/`, `/haver/privacy.html`, `/haver/support.html` | Haver |
+| `/overtone-workouts/` | Overtone's workout library, published from the [overtone-workouts](https://github.com/randomoid-apps/overtone-workouts) repository |
+
+Plain HTML and one stylesheet, served by GitHub Pages from `main`. A privacy policy says what its app
+sends and keeps: change it, and its date, with anything in the app that changes that.

@@ -50,3 +50,17 @@ p, li { color: var(--ink); }
 .workouts img { width: 56px; height: 56px; border-radius: 10px; object-fit: cover; flex: none; }
 .workouts strong { display: block; }
 footer { margin-top: 56px; padding-top: 20px; border-top: 1px solid var(--line); }
+
+/* Each app's pages take its own accent. */
+body.haver { --accent: #9a5418; --fill: #9a5418; --on-fill: #ffffff; }
+@media (prefers-color-scheme: dark) {
+  body.haver { --accent: #e8b46a; --fill: #e8b46a; --on-fill: #0b0b0c; }
+}
+body.home { --accent: var(--ink); }
+.apps { list-style: none; padding: 0; display: grid; gap: 12px; }
+.apps a {
+  display: block; background: var(--card); border: 1px solid var(--line); border-radius: 14px;
+  padding: 16px 18px; color: var(--ink);
+}
+.apps a:hover { text-decoration: none; border-color: var(--muted); }
+.apps strong { display: block; font-size: 19px; }
