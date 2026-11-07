@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Overtone</title>
+<meta name="description" content="Overtone plays a spoken coach over your own music: workouts, drills and timed sessions on iPhone and Apple Watch.">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<main>
+  <nav>
+    <a href="./">Overtone</a>
+    <a href="https://github.com/overtone-workouts/overtone-workouts">Workouts</a>
+    <a href="support.html">Support</a>
+    <a href="privacy.html">Privacy</a>
+  </nav>
+
+  <h1>A coach that talks over your music.</h1>
+  <p class="lead">Overtone plays a spoken workout on top of whatever you're listening to. Your music dips only
+    while the coach speaks, and comes back up in the pauses.</p>
+
+  <h2>Made for exercise</h2>
+  <ul>
+    <li>Make a workout in a minute: exercises, sets, rounds and rests, with a count-in and calls at
+      halfway and the last seconds.</li>
+    <li>Or add one from the library, made by people who use Overtone.</li>
+    <li>The time left in big type, rests that turn the screen orange, and an Apple Watch app that
+      records the workout in Health.</li>
+    <li>Ask for a number as an exercise finishes, such as reps or weight, and see it charted over time.</li>
+  </ul>
+
+  <h2>The workout library</h2>
+  <p>Workouts and exercises are shared in a
+    <a href="https://github.com/overtone-workouts/overtone-workouts">public repository</a>, where anyone
+    can propose one. These are in it now:</p>
+  <ul class="workouts" id="workouts"></ul>
+  <p class="muted" id="workouts-note"></p>
+
+  <footer class="muted">
+    <a href="support.html">Support</a> · <a href="privacy.html">Privacy policy</a>
+  </footer>
+</main>
+<script>
+  // The library's catalog, published beside this site.
+  const base = "overtone-workouts/";
+  const list = document.getElementById("workouts");
+  const note = document.getElementById("workouts-note");
+  fetch(base + "catalog.json")
+    .then(response => response.ok ? response.json() : Promise.reject(response.status))
+    .then(catalog => {
+      for (const workout of catalog.workouts) {
+        const item = document.createElement("li");
+        if (workout.artwork) {
+          const image = document.createElement("img");
+          image.src = base + workout.artwork;
+          image.alt = "";
+          item.append(image);
+        }
+        const text = document.createElement("div");
+        const title = document.createElement("strong");
+        title.textContent = workout.title;
+        const details = document.createElement("span");
+        details.className = "muted";
+        details.textContent = `About ${Math.max(1, Math.round(workout.seconds / 60))} min · ${workout.exercises} exercises`;
+        text.append(title, details);
+        item.append(text);
+        list.append(item);
+      }
+      const exercises = (catalog.exercises || []).length;
+      if (exercises) note.textContent = `And ${exercises} exercises to build your own from.`;
+    })
+    .catch(() => { note.textContent = "The list couldn't be loaded just now."; });
+</script>
+</body>
+</html>
